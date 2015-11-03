@@ -9,8 +9,6 @@ else if(isset($_SESSION['userName']))
 if(isset($_POST['passWord']))
 	$userPassword = strip_tags($_POST['passWord']);
 
-/* else if(isset($_SESSION['passWord']))
-	$userPassword = $_SESSION['passWord']; */
 
 if(!isset($userName))
 {
@@ -49,11 +47,11 @@ else
 				$_SESSION['userName'] = $userName;
 				//$_SESSION['passWord'] = $passWord;
 			}
-			else
-			{	
-				echo("<p>Illegal user name and password, access denied.</p>");
-				exit;
-			}
+		}
+		else
+		{
+			echo("<p>Illegal user name and password, access denied.</p>");
+			exit;
 		}
 	}	
 }
