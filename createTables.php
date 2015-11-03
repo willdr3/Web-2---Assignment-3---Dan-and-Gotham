@@ -2,17 +2,18 @@
 include 'connect.inc.php';
 
 // Users table
-$dropQuery = "DROP TABLE IF EXISTS tblScreenUsers;";
+$dropQuery = "DROP TABLE IF EXISTS tblUsers;";
 $result = mysqli_query($connection, $dropQuery);
 
-$createUserTblQuery = "CREATE TABLE tblScreenUsers
+$createUserTblQuery = "CREATE TABLE tblUsers
 (
-	userID				INT(6)					NOT NULL		 AUTO_INCREMENT,
-	lastName			VARCHAR(20) 		NOT NULL,
+	userID				INT(6)			NOT NULL		 AUTO_INCREMENT,
 	firstName			VARCHAR(20)		NOT NULL,
-	passWord			VARCHAR(100)		NOT NULL,
+	lastName			VARCHAR(20) 	NOT NULL,
 	email				VARCHAR(50)		NOT NULL,
-	displayName		VARCHAR(20)		NOT NULL,
+	userName		    VARCHAR(20)		NOT NULL,	
+	passWord			VARCHAR(100)	NOT NULL,
+	
 	
 	PRIMARY KEY(userID)
 )";

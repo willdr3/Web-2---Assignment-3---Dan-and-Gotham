@@ -6,8 +6,8 @@ if(isset($_POST['userName']))
 else if(isset($_SESSION['userName']))
 	$userName = $_SESSION['userName'];
 
-if(isset($_POST['userPassword']))
-	$userPassword = strip_tags($_POST['userPassword']);
+if(isset($_POST['passWord']))
+	$userPassword = strip_tags($_POST['passWord']);
 
 if(!isset($userName))
 {
@@ -17,9 +17,11 @@ if(!isset($userName))
 	echo("<form action='$self' method='POST'><fieldset>");
 	
 	echo("User Name: <input type='text' name='userName' value='' size='30'><br /><br />");
-	echo("Password: <input type='text' name='userPassword' value='' size='30'><br /><br />");
+	echo("Password: <input type='text' name='passWord' value='' size='30'><br /><br />");
 
 	echo("<input type='submit' name='submitted' value='LOGIN'>");
+	
+	echo("<a href='RegistrationPage.php'>Register Here</a>");
 	
 	echo("</fieldset></form>");
 	
@@ -29,7 +31,7 @@ else
 {
 	 if(isset($_POST['submitted']))
 	 {
-		$select = "SELECT * FROM tblUP WHERE (userName LIKE '$userName')";
+		$select = "SELECT * FROM tblUsers WHERE (userName LIKE '$userName')";
 		$result = mysqli_query($connection, $select);
 		
 		if(mysqli_num_rows($result) > 0)
@@ -38,7 +40,8 @@ else
 			// Assuming that user names are unique
 			
 			//Hashing the password with its hash as the salt returns the same hash
-			if(crypt($userPassword, $row['userPword']) === $row['userPword'])
+			if(crypt($userPassword, $row['passWord']) === $row['passWord'])
+			//if ($userPassword == $row['passWord'])
 			{
 				$_SESSION['userName'] = $userName;
 			}
