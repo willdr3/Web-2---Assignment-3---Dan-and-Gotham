@@ -1,7 +1,7 @@
 <?php
-session_start();
-include "connect.inc.php";
 include_once "header.php";
+include "connect.inc.php";
+
 
 ?>
 

@@ -9,6 +9,9 @@ else if(isset($_SESSION['userName']))
 if(isset($_POST['passWord']))
 	$userPassword = strip_tags($_POST['passWord']);
 
+/* else if(isset($_SESSION['passWord']))
+	$userPassword = $_SESSION['passWord']; */
+
 if(!isset($userName))
 {
 	//show login form
@@ -29,8 +32,8 @@ if(!isset($userName))
 }
 else
 {
-	 if(isset($_POST['submitted']))
-	 {
+	if(!isset($_SESSION['userName']))
+	{
 		$select = "SELECT * FROM tblUsers WHERE (userName LIKE '$userName')";
 		$result = mysqli_query($connection, $select);
 		
@@ -44,14 +47,14 @@ else
 			//if ($userPassword == $row['passWord'])
 			{
 				$_SESSION['userName'] = $userName;
+				//$_SESSION['passWord'] = $passWord;
 			}
 			else
 			{	
 				echo("<p>Illegal user name and password, access denied.</p>");
 				exit;
 			}
-		}	
-	}
+		}
+	}	
 }
 ?>
-</body></html>
