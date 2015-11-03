@@ -19,20 +19,22 @@ showform($connection);
 
 function showform ($connection)
 {
-	
- 
+	echo("<div class='outerCont'>");
 	echo("<form action='RegistrationPage.php' method='POST'><fieldset>");
-	echo("First Name: <input type='text' name='FirstName' value='' size='30'><br /><br />");
-	echo("Last Name: <input type='text' name='LastName' value='' size='30'><br /><br />");
-	echo("Email: <input type='text' name='eMail' value='' size='30'><br /><br />");	
-	echo("User Name: <input type='text' name='userName' value='' size='30'><br /><br />");
-	echo("Password: <input type='text' name='userPassword' value='' size='30'><br /><br />");
-	echo("Re enter Password: <input type='text' name='userRePassword' value='' size='30'><br /><br />");
-	echo("Secret Pass Code: <input type='text' name='PassCode' value='' size='30'><br /><br />");
-
+	echo("<div class='innerCont'>");
+	echo("<h2>Register</h2>");
+	echo("First Name<input type='text' class='loginField' name='FirstName' value='' size='30'><br /><br />");
+	echo("Last Name<input type='text' class='loginField' name='LastName' value='' size='30'><br /><br />");
+	echo("Email<input type='text' class='loginField' name='eMail' value='' size='30'><br /><br />");	
+	echo("User Name<input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
+	echo("Password<input type='text' class='loginField' name='userPassword' value='' size='30'><br /><br />");
+	echo("Re enter Password<input type='text' class='loginField' name='userRePassword' value='' size='30'><br /><br />");
+	echo("Secret Pass Code<input type='text' class='loginField' name='PassCode' value='' size='30'><br /><br />");
 	echo("<input type='submit' name='submitted' value='SignUp'>");
-	
+	echo("</div>");
 	echo("</fieldset></form>");
+	echo("</div>");
+	
 }
 	
 	function ProcessForm($connection)

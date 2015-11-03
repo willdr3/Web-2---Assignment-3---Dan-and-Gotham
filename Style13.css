@@ -1,11 +1,90 @@
 body
 {
-margin:0;
-font-family: 'PT Sans', sans-serif;
-background-position:center;
+	margin:0;
+	font-family: 'PT Sans', sans-serif;
+	background-position:center;
+	background-color: #F1F1F1;
 }
 
- #container1
+h2 {
+	padding: 0;
+	margin: 0;
+}
+
+.spacer {
+	background-color: #F1F1F1;
+	height: 80px;
+	width: 100%;
+}
+
+.menu {
+	height: 80px;
+	background-color: #FFFFFF;
+	box-shadow: 5px 5px 2px #787878;
+}
+ 
+ .menu ul {
+	list-style: none;
+	text-align: center;
+	padding-top: 10px;
+	padding-right: 20px;
+	margin: 0;
+	float:right;
+}
+
+.menu li {
+	font-family: 'Oswald', sans-serif;
+	font-size: .9em;
+	line-height: 50px;
+	border-bottom: none;
+	display: inline-block;
+    padding-right: 20px;
+}
+ 
+.menu a {
+	text-decoration: none;
+	color: #6666FF;
+	display: block;
+	transition: .3s background-color;
+}
+
+.menu a:hover {
+	color: #000099;
+	transition: .3s color;
+}
+
+ .menu a:active  {
+	color: #00004D;
+}
+ 
+ .outerCont {
+	 margin: auto;
+	 width: 30%;
+	 background-color: #FFFFFF;
+	 border-radius: 5px;
+ }
+ 
+ .innerCont {
+	 padding: 20px;
+ }
+ 
+ .loginField {
+	 border: thin solid black;
+	 border-radius: 3px;
+	 width: 90%;
+ }
+ 
+.innerCont h2 {
+	 margin-bottom: 10px;
+ }
+ 
+ fieldset {
+	 border: thin solid gray;
+	 border-radius: 5px;
+	 box-shadow: 1px 2px 3px #787878;
+ }
+ 
+/*    #container1
  {
  min-height:700px;
  font-size:20px;
@@ -14,49 +93,4 @@ background-position:center;
  width: 70%;
  margin: auto;
  padding:30px; 
- } 
- 
- .menu ul {
-  list-style: none;
-  background-color: #EB3176;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
-
-.menu li {
-  font-family: 'Oswald', sans-serif;
-  font-size: 35px;
-  line-height: 60px;
-  height:40px;
-}
- 
-.menu a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  transition: .3s background-color;
-}
-
-.menu a:hover {
-  background-color: #011538;
-  transition: .3s background-color;
-}
-
- .menu a:active  {
-  color:#011538;
-  display: block; 
-}
-
-  .menu li {
-    width: 220px;
-    border-bottom: none;
-    height: 150px;
-    line-height: 50px;
-    font-size: 1.4em;
-  }
- 
-  .menu li {
-    display: inline-block;
-    margin-right: -4px;
-  }
+ }  */

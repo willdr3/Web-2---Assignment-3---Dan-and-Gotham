@@ -14,11 +14,13 @@ session_start();
 <body>	
 	<div class="menu">
 		<ul>
-			<li> <a href="index.php">Index </a></li>
-			<li> <a href="RegistrationPage.php">Registration</a></li>
+			<li> <a href="index.php">Login</a></li>
+			<li> <a href="RegistrationPage.php">Register</a></li>
 			<li> <a href="Home.php">Home</a></li>
-			<li> <a href="DataPage.php">Data Page</a></li>
-			<li> <a href="GraphsPage.php">Graphs Page</a></li>
-			<li> <a href="CalenderPage.php">Calender Page</a></li>
+			<li> <a href="DataPage.php">Data</a></li>
+			<li> <a href="GraphsPage.php">Graphs</a></li>
+			<li> <a href="CalenderPage.php">Calender</a></li>
 		</ul>
+	</div>
+	<div class="spacer">
 	</div>
