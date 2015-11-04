@@ -18,6 +18,7 @@ session_start();
 			<li> <a href="DataPage.php">Data</a></li>
 			<li> <a href="GraphsPage.php">Graphs</a></li>
 			<li> <a href="CalenderPage.php">Calender</a></li>
+			<li> <a href="LogOut.php">Sign Out</a></li>
 		</ul>
 	</div>
 	<div class="spacer">
