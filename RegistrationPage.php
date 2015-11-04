@@ -1,5 +1,5 @@
 <?php
-include_once "header.php";
+include_once "startHeader.php";
 include "connect.inc.php";
 
 
@@ -23,13 +23,13 @@ function showform ($connection)
 	echo("<form action='RegistrationPage.php' method='POST'><fieldset>");
 	echo("<div class='innerCont'>");
 	echo("<h2>Register</h2>");
-	echo("First Name<input type='text' class='loginField' name='FirstName' value='' size='30'><br /><br />");
-	echo("Last Name<input type='text' class='loginField' name='LastName' value='' size='30'><br /><br />");
-	echo("Email<input type='text' class='loginField' name='eMail' value='' size='30'><br /><br />");	
-	echo("User Name<input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
-	echo("Password<input type='text' class='loginField' name='userPassword' value='' size='30'><br /><br />");
-	echo("Re enter Password<input type='text' class='loginField' name='userRePassword' value='' size='30'><br /><br />");
-	echo("Secret Pass Code<input type='text' class='loginField' name='PassCode' value='' size='30'><br /><br />");
+	echo("First Name<br /><input type='text' class='loginField' name='FirstName' value='' size='30'><br /><br />");
+	echo("Last Name<br /><input type='text' class='loginField' name='LastName' value='' size='30'><br /><br />");
+	echo("Email<br /><input type='text' class='loginField' name='eMail' value='' size='30'><br /><br />");	
+	echo("User Name<br /><input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
+	echo("Password<br /><input type='text' class='loginField' name='userPassword' value='' size='30'><br /><br />");
+	echo("Re enter Password<br /><input type='text' class='loginField' name='userRePassword' value='' size='30'><br /><br />");
+	echo("Secret Pass Code<br /><input type='text' class='loginField' name='PassCode' value='' size='30'><br /><br />");
 	echo("<input type='submit' name='submitted' value='SignUp'>");
 	echo("</div>");
 	echo("</fieldset></form>");

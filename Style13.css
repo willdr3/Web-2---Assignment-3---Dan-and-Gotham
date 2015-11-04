@@ -3,7 +3,7 @@ body
 	margin:0;
 	font-family: 'PT Sans', sans-serif;
 	background-position:center;
-	background-color: #F1F1F1;
+	background-color: #FFF8DC;
 }
 
 h2 {
@@ -12,7 +12,7 @@ h2 {
 }
 
 .spacer {
-	background-color: #F1F1F1;
+	background-color: #FFF8DC;
 	height: 80px;
 	width: 100%;
 }
@@ -72,6 +72,7 @@ h2 {
 	 border: thin solid black;
 	 border-radius: 3px;
 	 width: 90%;
+	 height: 20px;
  }
  
 .innerCont h2 {

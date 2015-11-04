@@ -1,11 +1,10 @@
 <?php
-include_once "header.php";
-include_once "accessControl.inc.php";
+include_once "startHeader.php";
 ?>
+
+<h1>Hi, welcome to site</h1>
 
 	
 <?php
-
-	
-
+//include_once "accessControl.inc.php";
 ?>	

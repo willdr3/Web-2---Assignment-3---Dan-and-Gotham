@@ -19,8 +19,8 @@ if(!isset($userName))
 	echo("<form action='$self' method='POST'><fieldset>");
 	echo("<div class='innerCont'>");
 	echo("<h2>LogIn</h2>");
-	echo("User Name&nbsp;&nbsp;<input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
-	echo("Password&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' class='loginField' name='passWord' value='' size='30'><br /><br />");
+	echo("User Name<br /><input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
+	echo("Password<br /><input type='text' class='loginField' name='passWord' value='' size='30'><br /><br />");
 	echo("<input type='submit' name='submitted' value='LOGIN'>");
 	echo("<a href='RegistrationPage.php'>Register Here</a>");
 	echo("</div>");
