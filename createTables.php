@@ -2,8 +2,17 @@
 include 'connect.inc.php';
 
 // Users table
+
+
+$dropQuery = "DROP TABLE IF EXISTS tblExerTimes;";
+$result = mysqli_query($connection, $dropQuery);
+	
 $dropQuery = "DROP TABLE IF EXISTS tblUsers;";
 $result = mysqli_query($connection, $dropQuery);
+
+$dropQuery = "DROP TABLE IF EXISTS tblExerCategories;";
+$result = mysqli_query($connection, $dropQuery);
+
 
 $createUserTblQuery = "CREATE TABLE tblUsers
 (
@@ -29,8 +38,7 @@ else
 }
 
 // Screen categories table
-$dropQuery = "DROP TABLE IF EXISTS tblExerCategories;";
-$result = mysqli_query($connection, $dropQuery);	
+
 	
 $createCategoryTblQuery = "CREATE TABLE tblExerCategories
 (
@@ -53,7 +61,7 @@ else
 	 {
 	  $insertQuery = "INSERT into tblExerCategories(catName) values ('$category')";
 	  $result = mysqli_query($connection, $insertQuery);
-		echo("yerp");
+		
 	  	  
 	}
 
@@ -70,19 +78,20 @@ else
 	  
 
 // Screen time table
-$dropQuery = "DROP TABLE IF EXISTS tblExerTimes;";
-$result = mysqli_query($connection, $dropQuery);
+
 
 $createScreenTimesQuery = "CREATE TABLE tblExerTimes
 (
 	timeID			INT(6)				NOT NULL			AUTO_INCREMENT,
 	userID			INT(6)				NOT NULL,
-	catID			VARCHAR(30) 		NOT NULL,
+	catID			INT(6) 		NOT NULL,
 	date			VARCHAR(10) 		NOT NULL,
 	hours			INT(5)				NOT NULL,
 	
-	PRIMARY KEY(timeID),
-	FOREIGN KEY (userID) references tblUsers(userID)
+	PRIMARY KEY(timeID),	
+	FOREIGN KEY (userID) references tblUsers(userID),
+	FOREIGN KEY (catID) references tblExerCategories(catID)
+	
 )";
 $result = mysqli_query($connection, $createScreenTimesQuery);
 if($result != 1)

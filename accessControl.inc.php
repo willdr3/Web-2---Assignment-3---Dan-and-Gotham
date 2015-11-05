@@ -20,7 +20,7 @@ if(!isset($userName))
 	echo("<div class='innerCont'>");
 	echo("<h2>LogIn</h2>");
 	echo("User Name<br /><input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
-	echo("Password<br /><input type='text' class='loginField' name='passWord' value='' size='30'><br /><br />");
+	echo("Password<br /><input type='password' class='loginField' name='passWord' value='' size='30'><br /><br />");
 	echo("<input type='submit' name='submitted' value='LOGIN'>");
 	echo("<a href='RegistrationPage.php'>Register Here</a>");
 	echo("</div>");

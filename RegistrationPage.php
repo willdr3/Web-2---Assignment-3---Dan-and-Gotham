@@ -56,7 +56,7 @@ function showform ($connection)
 			$securePassword=crypt($firstPassword, $_POST['userPassword']);
 			$insertQuery = "INSERT into tblUsers(firstName,lastName,email, userName, passWord) values ('$firstName','$lastname', '$email', '$userName','$securePassword')";
 			$result = mysqli_query($connection, $insertQuery);
-			echo("Successfully created user. <a href='Home.php'>Click here to go to Home Page </a>");  
+			echo("Successfully created user. <a href='LogIn.php'>Click here to go to Login Page </a>");  
 			  
 		}
 		else
