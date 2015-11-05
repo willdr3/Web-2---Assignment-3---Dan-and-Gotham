@@ -27,9 +27,9 @@ function showform ($connection)
 	echo("Last Name<br /><input type='text' class='loginField' name='LastName' value='' size='30'><br /><br />");
 	echo("Email<br /><input type='text' class='loginField' name='eMail' value='' size='30'><br /><br />");	
 	echo("User Name<br /><input type='text' class='loginField' name='userName' value='' size='30'><br /><br />");
-	echo("Password<br /><input type='text' class='loginField' name='userPassword' value='' size='30'><br /><br />");
-	echo("Re enter Password<br /><input type='text' class='loginField' name='userRePassword' value='' size='30'><br /><br />");
-	echo("Secret Pass Code<br /><input type='text' class='loginField' name='PassCode' value='' size='30'><br /><br />");
+	echo("Password<br /><input type='password' class='loginField' name='userPassword' value='' size='30'><br /><br />");
+	echo("Re enter Password<br /><input type='password' class='loginField' name='userRePassword' value='' size='30'><br /><br />");
+	echo("Secret Pass Code<br /><input type='password' class='loginField' name='PassCode' value='' size='30'><br /><br />");
 	echo("<input type='submit' name='submitted' value='SignUp'>");
 	echo("</div>");
 	echo("</fieldset></form>");

@@ -49,7 +49,25 @@ else
 {
 	echo ("Categories Table Created <br>");
 }
+	function createCategoryRecord($category, $connection)
+	 {
+	  $insertQuery = "INSERT into tblExerCategories(catName) values ('$category')";
+	  $result = mysqli_query($connection, $insertQuery);
+		echo("yerp");
+	  	  
+	}
 
+	 createCategoryRecord('Running', $connection);
+	 createCategoryRecord('Weights', $connection);
+	 createCategoryRecord('Swimming', $connection);
+	 createCategoryRecord('Yoga', $connection);
+	 createCategoryRecord('Cycling', $connection);
+	 createCategoryRecord('Cricket', $connection);
+	 createCategoryRecord('Touch', $connection);
+	 createCategoryRecord('Boxing', $connection);
+	 createCategoryRecord('Hiking', $connection);
+	
+	  
 
 // Screen time table
 $dropQuery = "DROP TABLE IF EXISTS tblExerTimes;";
@@ -64,8 +82,7 @@ $createScreenTimesQuery = "CREATE TABLE tblExerTimes
 	hours			INT(5)				NOT NULL,
 	
 	PRIMARY KEY(timeID),
-	FOREIGN KEY (userID) references tblUsers(userID),
-	FOREIGN KEY (catID) references tblExerCategories(catID)
+	FOREIGN KEY (userID) references tblUsers(userID)
 )";
 $result = mysqli_query($connection, $createScreenTimesQuery);
 if($result != 1)
