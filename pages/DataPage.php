@@ -1,7 +1,7 @@
 <?php
 include_once "../includeFiles/header.php";
 include "../includeFiles/accessControl.inc.php";
-include_once "../DatePicker.php";
+include_once "DatePicker.php";
 
 $user = $_SESSION['userName'];
 
