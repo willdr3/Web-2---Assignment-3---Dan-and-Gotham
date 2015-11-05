@@ -1,4 +1,4 @@
 <?php
-include_once "../includeFiles/header.php";
+include_once "../includeFiles/StartHeader.php";
 include "../includeFiles/accessControl.inc.php";
 ?>
