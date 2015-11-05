@@ -9,6 +9,15 @@ session_start();
 	 <link rel="stylesheet" href="../Style13.css">
 	  <!-- Linking the font I chose to use -->
 	 <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	 <script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
+	 <script type="text/javascript" src="../jquery-ui-1.8.17.custom.min.js"></script>
+	 <link rel="stylesheet" type="text/css"
+			 href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+	 <script type="text/javascript">
+		    $(document).ready(function(){
+			$("#date").datepicker({  maxDate: new Date });
+		    });
+	 </script>
 </head>
 <body>	
 	<div class="menu">
