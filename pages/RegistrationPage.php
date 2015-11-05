@@ -1,6 +1,6 @@
 <?php
-include_once "startHeader.php";
-include "connect.inc.php";
+include_once "../includeFiles/startHeader.php";
+include "../includeFiles/connect.inc.php";
 
 
 ?>

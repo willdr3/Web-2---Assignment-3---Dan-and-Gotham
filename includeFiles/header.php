@@ -6,10 +6,9 @@ session_start();
 <head>
 	<title>Exercise Monitor</title>
 	 <meta charset="UTF-8">
-	 <link rel="stylesheet" href="Style13.css">
+	 <link rel="stylesheet" href="../Style13.css">
 	  <!-- Linking the font I chose to use -->
 	 <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-	 <style type = "text/css">	 </style>
 </head>
 <body>	
 	<div class="menu">

@@ -1,5 +1,5 @@
 <?php
-include_once "startHeader.php";
+include_once "includeFiles/startHeader.php";
 ?>
 
 <h1>Hi, welcome to site</h1>

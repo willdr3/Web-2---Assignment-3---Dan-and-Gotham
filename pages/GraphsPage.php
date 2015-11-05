@@ -1,6 +1,6 @@
 <?php
-include_once "header.php";
-include "accessControl.inc.php";
+include_once "../includeFiles/header.php";
+include "../includeFiles/accessControl.inc.php";
 
 $user = $_SESSION['userName'];
 echo("
