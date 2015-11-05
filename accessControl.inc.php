@@ -47,7 +47,11 @@ else
 			{
 				$_SESSION['userName'] = $userName;
 				//$_SESSION['passWord'] = $passWord;
+				header('Location: Home.php');
+				die();
 			}
+			header('Location: LogIn.php');
+			die();
 		}
 		else
 		{
