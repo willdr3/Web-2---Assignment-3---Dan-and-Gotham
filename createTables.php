@@ -16,12 +16,12 @@ $result = mysqli_query($connection, $dropQuery);
 
 $createUserTblQuery = "CREATE TABLE tblUsers
 (
-	userID				INT(6)			NOT NULL		 AUTO_INCREMENT,
+	userID				INT(6)					NOT NULL		 AUTO_INCREMENT,
 	firstName			VARCHAR(20)		NOT NULL,
-	lastName			VARCHAR(20) 	NOT NULL,
+	lastName			VARCHAR(20) 		NOT NULL,
 	email				VARCHAR(50)		NOT NULL,
 	userName		    VARCHAR(20)		NOT NULL,	
-	passWord			VARCHAR(100)	NOT NULL,
+	passWord			VARCHAR(100)		NOT NULL,
 	
 	
 	PRIMARY KEY(userID)
@@ -42,7 +42,7 @@ else
 	
 $createCategoryTblQuery = "CREATE TABLE tblExerCategories
 (
-	catID		INT(6)				NOT NULL			AUTO_INCREMENT,
+	catID			INT(6)					NOT NULL			AUTO_INCREMENT,
 	catName		VARCHAR(30) 		NOT NULL,
 	
 	PRIMARY KEY(catID)
@@ -84,14 +84,13 @@ $createScreenTimesQuery = "CREATE TABLE tblExerTimes
 (
 	timeID			INT(6)				NOT NULL			AUTO_INCREMENT,
 	userID			INT(6)				NOT NULL,
-	catID			INT(6) 		NOT NULL,
-	date			VARCHAR(10) 		NOT NULL,
+	catID			INT(6) 				NOT NULL,
+	date				VARCHAR(10) 	NOT NULL,
 	hours			INT(5)				NOT NULL,
 	
 	PRIMARY KEY(timeID),	
 	FOREIGN KEY (userID) references tblUsers(userID),
 	FOREIGN KEY (catID) references tblExerCategories(catID)
-	
 )";
 $result = mysqli_query($connection, $createScreenTimesQuery);
 if($result != 1)

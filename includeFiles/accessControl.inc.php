@@ -1,6 +1,8 @@
 <?php
 include "connect.inc.php";
 
+if(isset($_SESSION['userID']))
+	$userID=$_SESSION['userID'];
 if(isset($_POST['userName']))
 	$userName = strip_tags($_POST['userName']);
 else if(isset($_SESSION['userName']))
@@ -46,6 +48,7 @@ else
 			//if ($userPassword == $row['passWord'])
 			{
 				$_SESSION['userName'] = $userName;
+				$_SESSION['userID'] = $row['userID'];
 				//$_SESSION['passWord'] = $passWord;
 				header('Location: Home.php');
 				die();

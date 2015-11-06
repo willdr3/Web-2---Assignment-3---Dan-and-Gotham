@@ -14,8 +14,18 @@ session_start();
 <body>	
 	<div class="menu">
 		<ul>
-			<li> <a href="pages/LogIn.php">Login</a></li>
-			<li> <a href="pages/RegistrationPage.php">Register</a></li>
+			<?php
+			if(isset($logTrue) || isset($regTrue))
+			{
+				echo("<li> <a href='LogIn.php'>Login</a></li>");
+				echo("<li> <a href='RegistrationPage.php'>Register</a></li>");
+			}
+			else
+			{
+				echo("<li> <a href='pages/LogIn.php'>Login</a></li>");
+				echo("<li> <a href='pages/RegistrationPage.php'>Register</a></li>");
+			}
+			 ?>
 		</ul>
 	</div>
 	<div class="spacer">

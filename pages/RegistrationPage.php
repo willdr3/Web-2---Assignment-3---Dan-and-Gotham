@@ -1,8 +1,7 @@
 <?php
+$regTrue = true;
 include_once "../includeFiles/startHeader.php";
 include "../includeFiles/connect.inc.php";
-
-
 ?>
 
 	

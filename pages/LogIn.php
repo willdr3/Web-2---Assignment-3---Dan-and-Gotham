@@ -1,4 +1,5 @@
 <?php
-include_once "../includeFiles/StartHeader.php";
+$logTrue = true;
+include_once "../includeFiles/startHeader.php";
 include "../includeFiles/accessControl.inc.php";
 ?>
