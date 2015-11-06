@@ -13,7 +13,7 @@ if (isset($_POST['submitted']))
 }
 else
 {
-showform($connection);
+	showform($connection);
 }
 
 function showform ($connection, $firstname='',$lastname='', $email='', $userName='', $firstNameerr ='', $lastNameerr='',$emailErr='', $userNameerr='', $passWdErr='', $rePassWdErr='',$codeErr='')
@@ -46,14 +46,14 @@ function showform ($connection, $firstname='',$lastname='', $email='', $userName
 }
 
 function cleanTheInput($data)
-	  {
-		  $data = trim ($data);
-		  $data = stripcslashes($data);
-		  $data = htmlspecialchars($data);
-		  return $data;	  
-	  }
+  {
+	  $data = trim ($data);
+	  $data = stripcslashes($data);
+	  $data = htmlspecialchars($data);
+	  return $data;	  
+  }
 	
-	function ProcessForm($connection)
+function ProcessForm($connection)
 	{
 	
 	$dataCorrect = true;

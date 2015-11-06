@@ -40,29 +40,43 @@ function showForm($connection, $user, $userID)
 
 function addedForm($connection)
 {
-	$dateTemp = cleanData($_POST['date']);
-	$parts = explode("/", $dateTemp);
- 	$year = $parts[2];
-	$month = $parts[1];
-	$day = $parts[0];
-	$dateInsert = ("{$year}-{$month}-{$day}");
+	$dateInsert = cleanData($_POST['date']);
 	$activityInsert = cleanData($_POST['activity']);
 	$timeInsert = cleanData($_POST['time']);
+	////////// ASK GOWTHAM about, do we need to insert catName or catID
+	////////// If name, we need to change tblExerTimes to hold catName, 
+	////////// If id, need to do select statement to get catID based on catName
+	////////// Both statements are below and ready
+	
+	$selectCatID = "SELECT DISTINCT catID from tblExerCategories WHERE catName LIKE '$activityInsert'";
+	$result = mysqli_query($connection, $selectCatID);
+	
+	if(mysqli_num_rows($result) > 0)
+	{
+		$row = mysqli_fetch_assoc($result);
+		$catID = $row['catID'];
+	}
 	
 	//addActivity($dateInsert, $activityInsert, $timeInsert, $connection);
+	//addActivity($dateInsert, $catID, $timeInsert, $connection);
 	
 	echo("<form action='DataPage.php' method='POST'><fieldset><legend>Activity Inserted</legend>");
 	
 	echo("<h1>Success</h1>");
-	echo("$dateInsert");
+	echo("$dateInsert<br>");
+	echo("$activityInsert<br>");
+	echo("$catID<br>");
+	echo("$timeInsert<br>");
 	
 	echo("</fieldset></form>");
 }
 
-function addActivity($countryName, $shortCountry, $connection)
+function addActivity($dateInsert, $catID, $timeInsert, $connection)
 {
 	
-	$insertQuery = "INSERT into tblExerTimes(countryName, shortCountry, countryFlag) VALUES ('$countryName','$shortCountry','$image')";
+	
+	
+	$insertQuery = "INSERT into tblExerTimes(userID, catID, date, hours) VALUES ('$userID','$catID','$dateInsert','$timeInsert')";
 	
 	$result = mysqli_query($connection, $insertQuery);
 	if($result != 1)
