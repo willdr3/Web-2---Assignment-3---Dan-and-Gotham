@@ -14,8 +14,8 @@ session_start();
 <body>	
 	<div class="menu">
 		<ul>
-			<li> <a href="pages/LogIn.php">Login</a></li>
-			<li> <a href="pages/RegistrationPage.php">Register</a></li>
+			<li> <a href="LogIn.php">Login</a></li>
+			<li> <a href="RegistrationPage.php">Register</a></li>
 		</ul>
 	</div>
 	<div class="spacer">
