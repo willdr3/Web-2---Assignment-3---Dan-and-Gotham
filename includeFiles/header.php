@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "connect.inc.php";
 ?>
 <!doctype html>
 <html>
@@ -15,9 +16,13 @@ session_start();
 			 href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
 	 <script type="text/javascript">
 		    $(document).ready(function(){
-			$("#date").datepicker({  maxDate: new Date });
+			$("#date").datepicker({  maxDate: new Date, dateFormat: "yy-mm-dd" });
 		    });
 	 </script>
+	 <?php
+			$user = $_SESSION['userName'];
+			$userID = $_SESSION['userID'];
+	 ?>
 </head>
 <body>	
 	<div class="menu">
