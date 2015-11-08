@@ -5,7 +5,7 @@ include "../includeFiles/accessControl.inc.php";
 
 if (isset($_POST['submitted']))
 {
-	addedForm($connection);
+	addedForm($user, $userID, $connection);
 }
 else
 {
@@ -38,15 +38,11 @@ function showForm($connection, $user, $userID)
 	echo("</form>");
 }
 
-function addedForm($connection)
+function addedForm($user, $userID, $connection)
 {
 	$dateInsert = cleanData($_POST['date']);
 	$activityInsert = cleanData($_POST['activity']);
 	$timeInsert = cleanData($_POST['time']);
-	////////// ASK GOWTHAM about, do we need to insert catName or catID
-	////////// If name, we need to change tblExerTimes to hold catName, 
-	////////// If id, need to do select statement to get catID based on catName
-	////////// Both statements are below and ready
 	
 	$selectCatID = "SELECT DISTINCT catID from tblExerCategories WHERE catName LIKE '$activityInsert'";
 	$result = mysqli_query($connection, $selectCatID);
@@ -57,12 +53,12 @@ function addedForm($connection)
 		$catID = $row['catID'];
 	}
 	
-	//addActivity($dateInsert, $activityInsert, $timeInsert, $connection);
-	//addActivity($dateInsert, $catID, $timeInsert, $connection);
+	addActivity($userID, $dateInsert, $catID, $timeInsert, $connection);
 	
 	echo("<form action='DataPage.php' method='POST'><fieldset><legend>Activity Inserted</legend>");
 	
 	echo("<h1>Success</h1>");
+	echo("Nice job $user, you have logged $timeInsert hours of $activityInsert for $dateInsert.<br>");
 	echo("$dateInsert<br>");
 	echo("$activityInsert<br>");
 	echo("$catID<br>");
@@ -71,11 +67,8 @@ function addedForm($connection)
 	echo("</fieldset></form>");
 }
 
-function addActivity($dateInsert, $catID, $timeInsert, $connection)
+function addActivity($userID, $dateInsert, $catID, $timeInsert, $connection)
 {
-	
-	
-	
 	$insertQuery = "INSERT into tblExerTimes(userID, catID, date, hours) VALUES ('$userID','$catID','$dateInsert','$timeInsert')";
 	
 	$result = mysqli_query($connection, $insertQuery);
@@ -85,7 +78,6 @@ function addActivity($dateInsert, $catID, $timeInsert, $connection)
 		echo("There was a problem adding that Activity, please try again.");
 		die();
 	}
-	echo ("Country added succesfully!");
 }
 
 function cleanData($data)
