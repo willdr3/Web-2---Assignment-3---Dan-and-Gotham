@@ -85,12 +85,15 @@ h2 {
 	 box-shadow: 1px 2px 3px #787878;
  }
  
- .Span
- {
- color:red;
- font-size:.9em;
- 
+ .Span {
+	 color:red;
+	 font-size:.9em;
  }
+ 
+#calendar {
+	width: 600px;
+	margin: 0 auto;
+}
  
 /*    #container1
  {

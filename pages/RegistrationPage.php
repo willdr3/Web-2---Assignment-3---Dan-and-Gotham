@@ -62,7 +62,7 @@ function ProcessForm($connection)
 	
 	//Regex Checking
 	$firstNamecheck = "^([A-Z][a-z]+(-[A-Z][a-z]+)?)$";
-	$lastnamecheck = "^([A-Z]([a-z])?+(-[A-Z][a-z]+)?)$";
+	$lastnamecheck = "^([A-Z][a-z]+(-[A-Z][a-z]+)?)$";
 	
 	$firstNameerr ='';
 	$lastNameerr='';

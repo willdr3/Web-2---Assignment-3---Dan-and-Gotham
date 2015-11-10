@@ -69,7 +69,7 @@ function addedForm($user, $userID, $connection)
 
 function addActivity($userID, $dateInsert, $catID, $timeInsert, $connection)
 {
-	$insertQuery = "INSERT into tblExerTimes(userID, catID, date, hours) VALUES ('$userID','$catID','$dateInsert','$timeInsert')";
+	$insertQuery = "INSERT into tblExerTimes(userID, catID, date, minutes) VALUES ('$userID','$catID','$dateInsert','$timeInsert')";
 	
 	$result = mysqli_query($connection, $insertQuery);
 	if($result != 1)

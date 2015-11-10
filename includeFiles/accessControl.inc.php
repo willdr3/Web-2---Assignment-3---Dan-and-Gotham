@@ -45,11 +45,9 @@ else
 			
 			//Hashing the password with its hash as the salt returns the same hash
 			if(crypt($userPassword, $row['passWord']) === $row['passWord'])
-			//if ($userPassword == $row['passWord'])
 			{
 				$_SESSION['userName'] = $userName;
 				$_SESSION['userID'] = $row['userID'];
-				//$_SESSION['passWord'] = $passWord;
 				header('Location: Home.php');
 				die();
 			}
