@@ -14,8 +14,8 @@ include "connect.inc.php";
 	<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar/fullcalendar.css' />
 	<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />
 
-	<script type='text/javascript' src='../jquery-1.8.1.min.js'></script>
-	<script type='text/javascript' src='../jquery-ui-1.8.23.custom.min.js'></script>
+	<script type='text/javascript' src='../jquery-1.7.1.min.js'></script>
+	<script type='text/javascript' src='../jquery-ui-1.8.17.custom.min.js'></script>
 
 	<script type='text/javascript' src='fullcalendar/fullcalendar/fullcalendar.min.js'></script>
 
@@ -38,7 +38,7 @@ include "connect.inc.php";
 		<ul>
 			<li> <a href="Home.php">Home</a></li>
 			<li> <a href="DataPage.php">Check-In</a></li>
-			<li> <a href="CalenderPage.php">Calender</a></li>
+			<li> <a href="CalendarPage.php">Calendar</a></li>
 			<li> <a href="GraphsPage.php">Review</a></li>
 			<li> <a href="GraphsPage2.php">Comparisons</a></li>
 			<li> <a href="TotalsPage.php">Life Stats</a></li>

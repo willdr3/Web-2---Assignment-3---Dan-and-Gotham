@@ -1,18 +1,18 @@
 <?php
-include_once "../includeFiles/graphHeader.php";
+include_once "../includeFiles/calHeader.php";
 include "../includeFiles/accessControl.inc.php";
-
 $user = $_SESSION['userName'];
+
+
 echo("
-<h1> Welcome $user this is Graphs Page </h1>
+<h1> Welcome $user this is calendar Page </h1>
 <div class='outerCalCont'>
 	<form><fieldset>
 	<div class='innerCont'>
-		<div id='chartDiv'></div>
-		<br><hr><br>
-		<div id='pieChart'></div>
+		<div id='calendar'></div>
 	</div>
 	</fieldset></form>
-<div>
+</div>
 ");
+
 ?>

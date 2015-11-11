@@ -31,6 +31,21 @@ while($row = mysqli_fetch_assoc($result))
 		case "6":
 			$color = "pink";
 			break;
+		case "7":
+			$color = "black";
+			break;
+		case "8":
+			$color = "gray";
+			break;
+		case "9":
+			$color = "tan";
+			break;
+		case "10":
+			$color = "brown";
+			break;
+		case "11":
+			$color = "navy";
+			break;
 	}
 	$eventArray['color'] = $color;
 	$events[] = $eventArray;

@@ -18,29 +18,36 @@ else
 
 function showform ($connection, $firstname='',$lastname='', $email='', $userName='', $firstNameerr ='', $lastNameerr='',$emailErr='', $userNameerr='', $passWdErr='', $rePassWdErr='',$codeErr='')
 {
-	echo("<div class='outerCont'>");
-	echo("<form action='RegistrationPage.php' method='POST'><fieldset>
-	<div class='innerCont'>
-	<h2>Register</h2>
-	First Name<br /><input type='text' class='loginField' name='FirstName' value='$firstname' size='30'><br />
-	<span class='Span'> $firstNameerr </span> <br><br />
-	Last Name<br /><input type='text' class='loginField' name='LastName' value='$lastname' size='30'><br />
-	<span class='Span'> $lastNameerr </span> <br><br />
-	Email<br /><input type='text' class='loginField' name='eMail' value='$email' size='30'><br />
-	<span class='Span'>$emailErr </span> <br><br />
-	User Name<br /><input type='text' class='loginField' name='userName' value='$userName' size='30'><br />
-	<span class='Span'>$userNameerr </span> <br><br />
-	Password<br /><input type='password' class='loginField' name='userPassword' value='' size='30'><br />
-	<span class='Span'>$passWdErr </span> <br><br />
-	Re enter Password<br /><input type='password' class='loginField' name='userRePassword' value='' size='30'><br />
-	<span class='Span'>$rePassWdErr</span> <br><br />
-	Secret Pass Code<br /><input type='password' class='loginField' name='PassCode' value='' size='30'><br />
-	<span class='Span'>$codeErr</span> <br><br />
-	<input type='submit' name='submitted' value='SignUp'>
+	echo("
+	<div class='outerCont'>
+		<form action='RegistrationPage.php' method='POST'><fieldset>
+		<div class='innerCont'>
+			<h2>Register</h2>
+			First Name<br /><input type='text' class='loginField' name='FirstName' value='$firstname' size='30'><br />
+			<span class='Span'> $firstNameerr </span> <br><br />
+			
+			Last Name<br /><input type='text' class='loginField' name='LastName' value='$lastname' size='30'><br />
+			<span class='Span'> $lastNameerr </span> <br><br />
+			
+			Email<br /><input type='text' class='loginField' name='eMail' value='$email' size='30'><br />
+			<span class='Span'>$emailErr </span> <br><br />
+			
+			User Name<br /><input type='text' class='loginField' name='userName' value='$userName' size='30'><br />
+			<span class='Span'>$userNameerr </span> <br><br />
+			
+			Password<br /><input type='password' class='loginField' name='userPassword' value='' size='30'><br />
+			<span class='Span'>$passWdErr </span> <br><br />
+			
+			Re enter Password<br /><input type='password' class='loginField' name='userRePassword' value='' size='30'><br />
+			<span class='Span'>$rePassWdErr</span> <br><br />
+			
+			Secret Pass Code<br /><input type='password' class='loginField' name='PassCode' value='' size='30'><br />
+			<span class='Span'>$codeErr</span> <br><br />
+			
+			<input type='submit' name='submitted' value='SignUp'>
+		</div>
+		</fieldset></form>
 	</div>
-	</fieldset></form>
-	</div>
-	
 	");
 	
 }

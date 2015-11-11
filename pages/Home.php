@@ -3,7 +3,9 @@ include_once "../includeFiles/header.php";
 include "../includeFiles/accessControl.inc.php";
 ?>
 <div class='mainCont'>
-	<h1> Welcome to Home Page </h1>
-
-
+	<div class='outerCont'>
+		<div class='innerCont'>
+			<h1> Welcome to Home Page </h1>
+		</div>
+	</div>
 </div>

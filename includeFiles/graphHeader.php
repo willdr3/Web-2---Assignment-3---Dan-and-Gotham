@@ -8,23 +8,8 @@ include "connect.inc.php";
 	<title>Exercise Monitor</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../Style13.css">
-	<!-- Linking the font I chose to use -->
+	<!-- Linking the fonts I chose to use -->
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-	
-	<script type='text/javascript' src='../jquery-1.8.1.min.js'></script>
-	<script type='text/javascript' src='../jquery-ui-1.8.23.custom.min.js'></script>
-	
-	<script type="text/javascript">
-			$(document).ready(function(){
-			$("#date").datepicker({  maxDate: new Date, dateFormat: "yy-mm-dd" });
-			
-			var date = new Date();
-			var d = date.getDate();
-			var m = date.getMonth();
-			var y = date.getFullYear();
-			
-			});
-	</script>
 
 	 <?php
 			$user = $_SESSION['userName'];
@@ -33,25 +18,25 @@ include "connect.inc.php";
 	 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawVisualization);
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawVisualization);
 
-	function drawVisualization() {
-    // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([<?php
-	echo("['Dates'");
+		function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([<?php
+			echo("['Dates'");
 	
-	$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
-	$result = mysqli_query($connection,$selectString);
+			$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+			$result = mysqli_query($connection,$selectString);
 			
-	$types = array();
+			$types = array();
 
-	while($row = mysqli_fetch_assoc($result))
-	{
-		$types[] = $row['catID'];
-		echo(",'$row[catName]'");					
-	}
-	echo("]");				
+			while($row = mysqli_fetch_assoc($result))
+				{
+					$types[] = $row['catID'];
+					echo(",'$row[catName]'");					
+				}
+				echo("]");				
   
 	for	( $i =6; $i>= 0; $i--)
 	{
@@ -74,19 +59,70 @@ include "connect.inc.php";
 				echo (", 0");
 			}
 		}
-		echo("]");
-	}?>]);
+			echo("]");
+			
+
+	}
+			  ?>
+	
+	]);
 
     var options = {
-		title : 'Weekly Exercise data for <? echo("$user"); ?>.',
-		vAxis: {title: 'Hours'},
-		hAxis: {title: 'Exercise Time'},     
+      title : 'Weekly Exercise data for <? echo("$user"); ?>',
+      vAxis: {title: 'Hours'},
+      hAxis: {title: 'Exercise Time'},     
     };
 	
-	var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+	var chart = new google.visualization.ColumnChart(document.getElementById('chartDiv'));
     chart.draw(data, options);
-	}
-	</script> 
+	
+	var data1 = google.visualization.arrayToDataTable([
+		<?php
+			echo("['Exercise category', 'Total minutes']");
+			
+			$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+			$result = mysqli_query($connection,$selectString);
+			
+			$types1 = array();
+
+			while($row = mysqli_fetch_assoc($result))
+			{
+				$types1[] = $row['catName'];
+			}
+			for	($i =0; $i<count($types); $i++)
+			{
+				$totalMinutes = 0;
+				echo(",['$types1[$i]',");
+				$cat = $types1[$i];
+				
+				$selectCatID = "SELECT DISTINCT catID from tblExerCategories WHERE catName LIKE '$types1[$i]'";
+				$result = mysqli_query($connection, $selectCatID);
+				
+				if(mysqli_num_rows($result) > 0)
+				{
+					$row = mysqli_fetch_assoc($result);
+					$catID = $row['catID'];
+				}
+				
+				$selectString= "SELECT minutes FROM tblExerTimes WHERE catID = '$catID' AND userID = '$userID'";
+				$result = mysqli_query($connection,$selectString);
+				
+				while($row = mysqli_fetch_assoc($result))
+				{	
+					$totalMinutes =	$totalMinutes + $row['minutes'];			
+				}
+				echo("$totalMinutes]");
+			}
+			echo("  ]);");
+		?>
+		var options1 = {
+			title: 'Weekly Exercise percentages for <? echo("$user"); ?>',
+			is3D: true,
+        };
+			var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+			chart.draw(data1, options1);
+		}
+	</script>
 	 
 </head>
 <body>	
@@ -94,7 +130,7 @@ include "connect.inc.php";
 		<ul>
 			<li> <a href="Home.php">Home</a></li>
 			<li> <a href="DataPage.php">Check-In</a></li>
-			<li> <a href="CalenderPage.php">Calender</a></li>
+			<li> <a href="CalendarPage.php">Calendar</a></li>
 			<li> <a href="GraphsPage.php">Review</a></li>
 			<li> <a href="GraphsPage2.php">Comparisons</a></li>
 			<li> <a href="TotalsPage.php">Life Stats</a></li>

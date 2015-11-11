@@ -10,11 +10,19 @@ include "connect.inc.php";
 	<link rel="stylesheet" href="../Style13.css">
 	<!-- Linking the font I chose to use -->
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-
-	 <?php
-			$user = $_SESSION['userName'];
-			$userID = $_SESSION['userID'];
-	 ?>
+	<script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../jquery-ui-1.8.17.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		 href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+	<script type="text/javascript">
+	    $(document).ready(function(){
+		$("#date").datepicker({  maxDate: new Date, dateFormat: "yy-mm-dd" });
+	    });
+	</script>
+	<?php
+		$user = $_SESSION['userName'];
+		$userID = $_SESSION['userID'];
+	?>
 </head>
 <body>	
 	<div class="menu">
