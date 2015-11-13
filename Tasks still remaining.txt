@@ -1,0 +1,8 @@
+Still to do in website
+
+>> Targets > Graph of total hours put into exercise for each user over last 7 days (Target is to try and beat that)
+>> New category.
+>> Monthly chart, stackable bar graph, zero for no entry.
+>> Add code commenting
+>> Check validation
+>> Make tables less ugly

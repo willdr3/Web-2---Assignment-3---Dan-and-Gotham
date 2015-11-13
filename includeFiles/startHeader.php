@@ -12,21 +12,29 @@ session_start();
 	 <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>	
-	<div class="menu">
-		<ul>
 			<?php
 			if(isset($logTrue) || isset($regTrue))
 			{
-				echo("<li> <a href='LogIn.php'>Login</a></li>");
-				echo("<li> <a href='RegistrationPage.php'>Register</a></li>");
+				echo("<div class='menu'>");
+					echo("<img src='../images/stick5.png' alt='stickIcon' class='titleImg' />");
+					echo("<h1 class='title'>X-Track</h1>");
+					echo("<ul>");
+						echo("<li> <a href='LogIn.php'>Login</a></li>");
+						echo("<li> <a href='RegistrationPage.php'>Register</a></li>");
+					echo("</ul>");
+				echo("</div>");
 			}
 			else
 			{
-				echo("<li> <a href='pages/LogIn.php'>Login</a></li>");
-				echo("<li> <a href='pages/RegistrationPage.php'>Register</a></li>");
+				echo("<div class='menu'>");
+					echo("<img src='images/stick5.png' alt='stickIcon' class='titleImg' />");
+					echo("<h1 class='title'>X-Track</h1>");
+					echo("<ul>");
+						echo("<li> <a href='pages/LogIn.php'>Login</a></li>");
+						echo("<li> <a href='pages/RegistrationPage.php'>Register</a></li>");
+					echo("</ul>");
+				echo("</div>");
 			}
 			?>
-		</ul>
-	</div>
 	<div class="spacer">
 	</div>

@@ -63,7 +63,7 @@ include "connect.inc.php";
 			
 
 	}
-			  ?>
+	?>
 	
 	]);
 
@@ -127,6 +127,8 @@ include "connect.inc.php";
 </head>
 <body>	
 	<div class="menu">
+	<img src='../images/stick5.png' alt='stickIcon' class='titleImg' />
+	<h1 class='title'>X-Track</h1>
 		<ul>
 			<li> <a href="Home.php">Home</a></li>
 			<li> <a href="DataPage.php">Check-In</a></li>

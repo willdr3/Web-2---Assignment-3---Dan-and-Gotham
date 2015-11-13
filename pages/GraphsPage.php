@@ -4,8 +4,8 @@ include "../includeFiles/accessControl.inc.php";
 
 $user = $_SESSION['userName'];
 echo("
-<h1> Welcome $user this is Graphs Page </h1>
 <div class='outerCalCont'>
+<h1> Welcome $user this is Graphs Page </h1>
 	<form><fieldset>
 	<div class='innerCont'>
 		<div id='chartDiv'></div>

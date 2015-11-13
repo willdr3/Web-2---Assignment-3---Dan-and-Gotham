@@ -14,12 +14,12 @@ else
 
 function showForm($connection, $user, $userID, $dateErr='', $activityErr='', $timeErr='')
 {
-	echo("<div class='outerCont'>");
+	echo("<div class='outerHomeCont'>");
+	echo("<h1>Welcome back $user.<br>Enter your activity below</h1>");
 	echo("<form method='POST' action='DataPage.php'><fieldset>");
 	echo("<div class='innerCont'>");
-	echo("<h2>Welcome back $user.<br>Enter your activity below</h2>");
-	echo("Date : <input type='text'  name='date' id='date'/><br><br>");
-	echo("Activity:	<select name='activity'><option value='%'> Show all </option>");
+	echo("Date: <input type='text'  name='date' id='date'/><br><span class='Span'>$dateErr</span><br>");
+	echo("Activity: <select name='activity'><option value='%'> Show all </option>");
 	
 	// Using the variable in the above form so the user doesn't have to re enter the good data.
 	$selectString = 'SELECT DISTINCT catName, catID FROM tblExerCategories ORDER BY catName';
@@ -31,9 +31,9 @@ function showForm($connection, $user, $userID, $dateErr='', $activityErr='', $ti
 		echo("<option value = '$row[1]' >$row[0] ");
 	}			
 	echo("</select><span class='Span'>$activityErr</span><br><br>");
-	echo("Time: <input type='text' name='minutes' value='' size='30'><span class='Span'>$timeErr</span><br>");
-	
-	echo("<input type='submit' name='submitted' value='Insert'><br /><br />");
+	echo("Time: <input type='text' name='minutes' value='' size='30'><span class='Span'>$timeErr</span><br><br>");
+	echo("<input type='submit' name='submitted' value='Insert'><br><br>");
+	showTable($connection, $user, $userID);
 	echo("</div>");
 	echo("</fieldset></form>");
 	echo("</div>");
@@ -70,6 +70,15 @@ function addedForm($user, $userID, $connection)
 	else
 	{
 		$activityInsert = cleanData($_POST['activity']);
+		$selectActivity = "SELECT catID, minutes FROM tblExerTimes WHERE date = '$dateInsert' AND catID = '$activityInsert'";
+		$result = mysqli_query($connection, $selectActivity);
+		
+		if(mysqli_num_rows($result) > 0)
+		{
+			$ActivityErr = '*You have already entered this activity for today.';
+			$activityInsert ='';	
+			$dataTrue = false;
+		}
 	}
 	
 	if(empty($_POST['minutes']))
@@ -106,18 +115,16 @@ function addedForm($user, $userID, $connection)
 	{
 		addActivity($userID, $dateInsert, $activityInsert, $timeInsert, $connection);
 		
-		echo("<form action='DataPage.php' method='POST'><fieldset><legend>Activity Inserted</legend>");
-		
+		echo("<div class='outerHomeCont'>");
+		echo("<form action='DataPage.php' method='POST'><fieldset>");
+		echo("<div class='innerCont'>");
 		echo("<h1>Success</h1>");
-		echo("Nice job $user, you have logged $timeInsert minutes of $activityInsert for $dateInsert.<br>");
-		echo("$dateInsert<br>");
-		echo("$activityInsert<br>");
-		echo("$catID<br>");
-		echo("$timeInsert<br>");
+		echo("<br><br>Nice job $user, you have logged $timeInsert minutes of $activityInsert for $dateInsert.<br><br>");
 		
 		showTable($connection, $user, $userID);
-		
+		echo("</div>");
 		echo("</fieldset></form>");
+		echo("</div>");
 	}
 	else
 	{
@@ -127,9 +134,19 @@ function addedForm($user, $userID, $connection)
 
 function showTable($connection, $user, $userID)
 {
+	echo("<h2>Here are your entries for the last 5 days</h2>");
 	echo("
 	<table>
 	<tr><th>Date</th>");
+	
+	$dates = array();
+	$selectDate = "SELECT DISTINCT date FROM tblExerTimes WHERE userID = '$userID' ORDER BY date DESC";
+	$result = mysqli_query($connection, $selectDate);
+	
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$dates[] = $row['date'];
+	}
 	
 	$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
 	$result = mysqli_query($connection,$selectString);
@@ -143,16 +160,15 @@ function showTable($connection, $user, $userID)
 	}
 	echo("</tr>");
 	
-	for	( $i =6; $i>= 0; $i--)
+	for($i = 0; $i < 5; $i++)
 	{
-		$datesearch = date("Y-m-d", strtotime("-$i day"));
-		echo("<tr> <td>$datesearch </td>");
+		echo("<tr><td>$dates[$i]</td>");
 		
 		for	($j=0; $j<count($types); $j++)
 		{			
 			$typesearch = $types[$j];
-			$selectString= "SELECT * FROM tblExerTimes WHERE date = '$datesearch' AND catID = '$typesearch' AND userID = '$userID'";
-			$result = mysqli_query($connection,$selectString);
+			$selectString= "SELECT * FROM tblExerTimes WHERE date = '$dates[$i]' AND catID = '$typesearch' AND userID = '$userID'";
+			$result = mysqli_query($connection, $selectString);
 			
 			if (mysqli_num_rows($result) > 0)
 			{

@@ -86,7 +86,7 @@ $createScreenTimesQuery = "CREATE TABLE tblExerTimes
 	userID			INT(6)				NOT NULL,
 	catID			INT(6) 				NOT NULL,
 	date				VARCHAR(10) 	NOT NULL,
-	hours			INT(5)				NOT NULL,
+	minutes			INT(5)				NOT NULL,
 	
 	PRIMARY KEY(timeID),	
 	FOREIGN KEY (userID) references tblUsers(userID),
