@@ -8,6 +8,10 @@ echo("<div class='outerHomeCont'>");
 echo("<h1> Welcome $user this is Lifetime Statistics Page </h1>");
 echo("<form><fieldset>");
 echo("<div class='innerCont'>");
+echo("<h3>Summed hours of each activity</h3>");
+showTotals($connection, $user, $userID);
+echo("<br><hr><br>");
+echo("<h3>Total daily logged times</h3>");
 showTable($connection, $user, $userID);
 echo("</div>");
 echo("</fieldset></form>");
@@ -62,5 +66,47 @@ function showTable($connection, $user, $userID)
 		}
 		echo("</tr>");
 	}
+	echo("</table>");
+}
+
+function showTotals($connection,$user, $userID)
+{
+	echo("
+	<table>
+		<tr>
+			<th>Activity</th>
+			<th> Life Time totals</th>");
+			
+			$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+			$result = mysqli_query($connection,$selectString);
+			
+			$types = array();
+			$TypeNames = array();
+
+			while($row = mysqli_fetch_assoc($result))
+			{
+				$types[] = $row['catID'];
+				$TypeNames[] = $row['catName'];								
+			}
+			echo("
+		</tr>");
+		for	( $i =0; $i<count($TypeNames); $i++)
+		{
+			$totalMinutes =0;
+			echo("<tr><td>$TypeNames[$i]</td>");
+		
+			$typesearch = $types[$i];
+			$selectString= "SELECT minutes FROM tblExerTimes WHERE catID = '$typesearch' AND userID = '$userID'";
+			$result = mysqli_query($connection,$selectString);
+			
+			while($row = mysqli_fetch_assoc($result))
+			{	
+				$totalMinutes =	$totalMinutes + $row['minutes'];			
+			}
+			echo("<td>$totalMinutes</td>");
+			echo("</tr>");
+		}				
+		echo("
+	</table>");
 }
 ?>

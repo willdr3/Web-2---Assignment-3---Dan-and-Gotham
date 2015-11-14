@@ -98,3 +98,4 @@ function showTimesTable($connection)
 	}
 	echo("</table>");
 }
+?>

@@ -4,23 +4,10 @@
 body
 {
 	margin:0;
+	margin-bottom: 80px;
 	font-family: 'PT Sans', sans-serif;
 	background-position:center;
 	background-color: #FFF8DC;
-}
-
-.title {
-	float: left;
-	padding-left: 1%;
-	padding-top: .5%;
-	font-family: 'Dosis', sans-serif;
-}
-
-.titleImg {
-	height: 65%;
-	float: left;
-	padding-left: 3%;
-	padding-top: 1%;
 }
 
 h1 {
@@ -37,6 +24,39 @@ h1, h2, h3{
 fieldset {
 	border: none;
 	border-radius: 5px;
+}
+
+table
+{
+	border: solid medium black;
+	border-collapse: collapse;
+	width: 90%;
+	margin: auto;
+	text-align: center;
+}
+
+tr:nth-child(odd)
+{
+	background-color: #F5F5DC;
+}
+
+tr:nth-child(even)
+{
+	background-color: #DCDCDC;
+}
+
+.title {
+	float: left;
+	padding-left: 1%;
+	padding-top: .5%;
+	font-family: 'Dosis', sans-serif;
+}
+
+.titleImg {
+	height: 65%;
+	float: left;
+	padding-left: 3%;
+	padding-top: 1%;
 }
 
 .spacer {
@@ -169,14 +189,26 @@ fieldset {
 	margin: 0 auto;
 }
  
- #chartDiv {
-	 width: 95%;
-	 height: 300px;
-	 margin: 0 auto;
- }
+#chartDiv {
+	width: 95%;
+	height: 300px;
+	margin: 0 auto;
+}
+ 
+#chartDiv1 {
+	width: 95%;
+	height: 300px;
+	margin: 0 auto;
+}
+ 
+ #chartDiv2 {
+	width: 95%;
+	height: 300px;
+	margin: 0 auto;
+}
  
  #pieChart {
-	 width: 95%;
-	 height: 300px;
-	 margin: 0 auto;
- }
+	width: 95%;
+	height: 300px;
+	margin: 0 auto;
+}

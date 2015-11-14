@@ -11,6 +11,8 @@ echo("
 		<div id='chartDiv'></div>
 		<br><hr><br>
 		<div id='pieChart'></div>
+		<br><hr><br>
+		<div id='chartDiv2'></div>
 	</div>
 	</fieldset></form>
 <div>
