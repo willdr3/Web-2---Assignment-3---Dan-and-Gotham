@@ -2,10 +2,19 @@
 include_once "../includeFiles/dataHeader.php";
 include "../includeFiles/accessControl.inc.php";
 
+//button for submitting activity <input type='submit' name='newCategory' value='Add new category'>
 
 if (isset($_POST['submitted']))
 {
 	addedForm($user, $userID, $connection);
+}
+else if(isset($_POST['newCategorySubmit']))
+{
+	processNewCategory($user, $userID, $connection);
+}
+else if(isset($_POST['newCategory']))
+{
+	showNewCategoryForm($user, $userID, $connection);
 }
 else
 {
@@ -30,7 +39,7 @@ function showForm($connection, $user, $userID, $dateErr='', $activityErr='', $ti
 	{
 		echo("<option value = '$row[1]' >$row[0] ");
 	}			
-	echo("</select><span class='Span'>$activityErr</span><br><br>");
+	echo("</select><span class='Span'>$activityErr</span><input type='submit' name='newCategory' value='Add new category'><br><br>");
 	echo("Time: <input type='text' name='minutes' value='' size='30'><span class='Span'>$timeErr</span><br><br>");
 	echo("<input type='submit' name='submitted' value='Insert'><br><br>");
 	showTable($connection, $user, $userID);
@@ -41,9 +50,9 @@ function showForm($connection, $user, $userID, $dateErr='', $activityErr='', $ti
 
 function addedForm($user, $userID, $connection)
 {
-	$DateErr = '';
-	$ActivityErr ='';
-	$TimeErr = '';
+	$dateErr = '';
+	$activityErr ='';
+	$timeErr = '';
 	$catName = '';
 	$dataTrue = true;
 	
@@ -52,9 +61,11 @@ function addedForm($user, $userID, $connection)
 	
 	if(empty($_POST['date']))
 	{
-		  $DateErr = '*Date Required';
-		  $dateTemp='';	
-		  $dataTrue = false;
+		$dateErr = '*Date Required';
+		$dateTemp='';	
+		$dataTrue = false;
+		header('Location: DataPage.php');
+		die();
 	}
 	else
 	{
@@ -63,9 +74,11 @@ function addedForm($user, $userID, $connection)
 	
 	if(empty($_POST['activity']))
 	{
-		  $ActivityErr = '*Activity Required';
-		  $activityInsert ='';	
-		  $dataTrue = false;
+		$activityErr = '*Activity Required';
+		$activityInsert ='';	
+		$dataTrue = false;
+		header('Location: DataPage.php');
+		die();
 	}
 	else
 	{
@@ -83,7 +96,7 @@ function addedForm($user, $userID, $connection)
 	
 	if(empty($_POST['minutes']))
 	{
-		  $TimeErr = '*Time Required';
+		  $timeErr = '*Time Required';
 		  $timeInsert ='';	
 		  $dataTrue = false;
 	}
@@ -96,7 +109,7 @@ function addedForm($user, $userID, $connection)
 		}
 		else
 		{
-			$TimeErr = '*Please input numbers only';
+			$timeErr = '*Please input numbers only';
 			$timeInsert ='';	
 			$dataTrue = false;
 		}
@@ -204,4 +217,81 @@ function cleanData($data)
 	$data = htmlspecialchars($data);
 	return $data;
 }
+
+function showNewCategoryForm($connection, $user, $userID, $nameErr='')
+{
+	echo("<div class='outerHomeCont'>");
+	echo("<h1>Something new for you, $user.<br>Enter your activity below</h1>");
+	echo("<form method='POST' action='DataPage.php'><fieldset>");
+	echo("<div class='innerCont'>");
+	echo("New Category Name <input type='text'  name='newCatName' value='' size='30'/><span class='Span'>$nameErr</span><br><br>");
+	echo("<input type='submit' name='newCategorySubmit' value='Insert Category'><br><br>");
+	echo("<input type='submit' name='back' value='Return'>");
+	echo("</div>");
+	echo("</fieldset></form>");
+	echo("</div>");	
+}
+
+function processNewCategory($user, $userID, $connection)
+{
+	$correctData = true;
+	$nameErr = '';
+	$categoryName = '';
+	$nameCheck = "^([A-Z][a-z]+(-[A-Z][a-z]+)?)";
+	$categoryName = $_POST['newCatName'];
+	$selectCategory ="SELECT catName FROM tblExerCategories WHERE catName ='$categoryName'";
+	$result = mysqli_query($connection, $selectCategory);
+	if(mysqli_num_rows($result) > 0)
+	{
+		$nameErr = '*activity already exists';
+		$categoryName = '';
+		$correctData = false;	
+	}
+	else if (empty($_POST['newCatName']))
+	{
+		$nameErr = '*category name required';
+		$categoryName = '';
+		$correctData = false;
+	}
+	else
+	{
+		$categoryName = $_POST['newCatName'];
+		if (preg_match("/$nameCheck/", $categoryName))
+		{		
+			$categoryName = $_POST['newCatName'];
+			cleanData($categoryName);			
+		}
+		else
+		{
+			$nameErr = '*activity should start with Capital letter and must not contain Numbers, and can contain only "-"';
+			$categoryName = '';
+			$correctData = false;		
+		}
+	}
+	if ($correctData == true)
+	{
+		$insertIntoTable =  "INSERT into tblExerCategories(catName) values ('$categoryName')";
+		$result = mysqli_query($connection, $insertIntoTable);
+		echo("Congratulations you have added $categoryName as your new activity");
+		showForm($connection, $user, $userID);
+	 }
+	 else
+	 {
+		echo("Please try again, something went wrong");
+		showNewCategoryForm($connection,$nameErr);
+	 }
+}
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+

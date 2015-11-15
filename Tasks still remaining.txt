@@ -1,7 +1,6 @@
 Still to do in website
 
->> Targets > Graph of total hours put into exercise for each user over last 7 days (Target is to try and beat that)
->> New category.
->> Add code commenting
->> Check validation
->> Allow modification of data on life stats page (like did on RWC site)
+>> Targets > Graph of total hours put into exercise for each user over last 7 days (Target is to try and beat that) << Gowtham working on
+>> Add code commenting >>>> still to do
+>> Check validation > white spaces in site address need to be %20, something to do with </head><body> tags
+>> Allow modification of data on life stats page (like did on RWC site) <<< Working on now
