@@ -1,6 +1,12 @@
 <?php
 session_start();
 include "connect.inc.php";
+
+if (isset($_SESSION['userID']))
+{
+	$userID = $_SESSION['userID'];
+	$user = $_SESSION['userName'];
+}
 ?>
 <!doctype html>
 <html>
@@ -19,10 +25,6 @@ include "connect.inc.php";
 		$("#date").datepicker({  maxDate: new Date, dateFormat: "yy-mm-dd" });
 	    });
 	</script>
-	<?php
-		$user = $_SESSION['userName'];
-		$userID = $_SESSION['userID'];
-	?>
 </head>
 <body>	
 	<div class="menu">

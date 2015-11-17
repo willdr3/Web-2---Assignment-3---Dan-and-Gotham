@@ -1,6 +1,13 @@
 <?php
 session_start();
 include "connect.inc.php";
+
+if (isset($_SESSION['userID']))
+{
+	$userID = $_SESSION['userID'];
+	$user = $_SESSION['userName'];
+}
+	
 ?>
 <!doctype html>
 <html>
@@ -9,13 +16,7 @@ include "connect.inc.php";
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../Style13.css">
 	<!-- Linking the fonts I chose to use -->
-	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-
-	 <?php
-			$user = $_SESSION['userName'];
-			$userID = $_SESSION['userID'];
-	 ?>
-	 
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>	 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
 	google.load("visualization", "1", {packages:["corechart"]});

@@ -4,13 +4,11 @@ include "../includeFiles/accessControl.inc.php";
 
 $user = $_SESSION['userName'];
 echo("
-<div class='outerCalCont'>
+<div class='outer2GraphCont'>
 <h1> Welcome $user this is Comparisons Page</h1>
 	<form><fieldset>
 	<div class='innerCont'>
-		<div id='chartDiv'></div>
-		<br><hr><br>
-		<div id='chartDiv1'></div>
+		<div id='chartDivA'></div><div id='chartDivB'></div>
 	</div>
 	</fieldset></form>
 <div>

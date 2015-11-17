@@ -28,10 +28,6 @@ include "connect.inc.php";
 		});
 		});
 	</script>
-	<?php
-		$user = $_SESSION['userName'];
-		$userID = $_SESSION['userID'];
-	?>
 </head>
 <body>	
 	<div class="menu">

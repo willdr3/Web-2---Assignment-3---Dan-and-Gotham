@@ -2,7 +2,7 @@
 include_once "../includeFiles/dataHeader.php";
 include "../includeFiles/accessControl.inc.php";
 
-//button for submitting activity <input type='submit' name='newCategory' value='Add new category'>
+//echo("<div class='mainCont'>");
 
 if (isset($_POST['submitted']))
 {
@@ -16,9 +16,16 @@ else if(isset($_POST['newCategory']))
 {
 	showNewCategoryForm($user, $userID, $connection);
 }
+else if(isset($_POST['targetSubmit']))
+{
+	processTargets($user, $userID, $connection);
+	header('Location: DataPage.php');
+	die();
+}
 else
 {
 	showForm($connection, $user, $userID);
+	showTargets($connection, $user, $userID);
 }
 
 function showForm($connection, $user, $userID, $dateErr='', $activityErr='', $timeErr='')
@@ -133,7 +140,6 @@ function addedForm($user, $userID, $connection)
 		echo("<div class='innerCont'>");
 		echo("<h1>Success</h1>");
 		echo("<br><br>Nice job $user, you have logged $timeInsert minutes of $activityInsert for $dateInsert.<br><br>");
-		
 		showTable($connection, $user, $userID);
 		echo("</div>");
 		echo("</fieldset></form>");
@@ -145,8 +151,91 @@ function addedForm($user, $userID, $connection)
 	}
 }
 
+function showTargets($connection, $user, $userID)
+{
+	$selectTargetActivity = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+	$result = mysqli_query($connection,$selectTargetActivity);
+			
+	$types = array();
+	$typesId = array();
+	$targetMinutes = array();
+		
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$types[] = $row['catName'];
+		$typesId[] = $row['catID'];
+	}
+			
+	$selectTarget ="SELECT target FROM tblTargets WHERE userID = '$userID'";
+	$result = mysqli_query($connection,$selectTarget);
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$targetMinutes[] = $row['target'];
+	}
+	echo("<div class='outerSideCont'>");
+	echo("<h4>Feeling optimistic $user?<br>Set yourself some targets.</h4>");
+	echo("<form method='POST' action='DataPage.php'><fieldset>");
+	echo("<div class='innerCont'>");
+	echo("
+	<table>
+	<tr><th>Activity</th><th>Target</th></tr>");
+	for ($i=0; $i<count($types); $i++)
+	{
+		echo("<tr><td>$types[$i]</td> ");
+		if (empty($targetMinutes))
+		{
+			echo("<td><input type='text' name = 'activityTarget[]' value = '0' size ='10'/><br></td>");
+		}
+		else
+		{
+			echo("<td><input type='text' name = 'activityTarget[]' value = '$targetMinutes[$i]' size ='10'/><br></td>");
+		}
+		echo("</tr>");				
+	}	
+		
+	echo("</table><input type='submit' name='targetSubmit' value='Set Targets' />");
+	echo("</div>");
+	echo("</fieldset></form>");
+	echo("</div>");
+}
+
+function processTargets($user, $userID, $connection)
+{
+	$selectTargetActivity = "SELECT DISTINCT catID, catName FROM tblExerCategories";
+	$result = mysqli_query($connection, $selectTargetActivity);
+			
+	$types = array();
+	$typesId = array();
+
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$types[] = $row['catName'];
+		$typesId[] = $row['catID'];
+	}
+	$targetMinutes = $_POST['activityTarget'];
+			
+	for ($i=0; $i<count($types); $i++)
+	{
+		$selectTargetActivity = "SELECT * FROM tblTargets WHERE userID = '$userID' AND catID = '$typesId[$i]'";
+		$result = mysqli_query($connection, $selectTargetActivity);
+		
+		if (mysqli_num_rows($result) == 0) 
+		{
+			$insertQuery = "INSERT into tblTargets(userID,catID,target) VALUES ('$userID','$typesId[$i]','$targetMinutes[$i]')";	
+			$result = mysqli_query($connection, $insertQuery);
+		}
+		else 
+		{
+			$updateQuery = "UPDATE tblTargets SET target = '$targetMinutes[$i]' WHERE userID = '$userID' AND catID = '$typesId[$i]'";	
+			$result = mysqli_query($connection, $updateQuery);	
+		}
+	}
+	showTable($connection, $user, $userID);
+}
+
 function showTable($connection, $user, $userID)
 {
+	
 	echo("<h2>Here are your entries for the last 5 days</h2>");
 	echo("
 	<table>
@@ -172,7 +261,12 @@ function showTable($connection, $user, $userID)
 		echo("<th>$row[catName]</th>");					
 	}
 	echo("</tr>");
-	
+	if (empty($dates))
+	{
+		echo("There is no data entered please enter some data");
+	}
+	else
+	{
 	for($i = 0; $i < 5; $i++)
 	{
 		echo("<tr><td>$dates[$i]</td>");
@@ -194,6 +288,8 @@ function showTable($connection, $user, $userID)
 			}
 		}
 		echo("</tr>");
+	}
+	echo("</table>");
 	}
 }
 
@@ -281,6 +377,7 @@ function processNewCategory($user, $userID, $connection)
 		showNewCategoryForm($connection,$nameErr);
 	 }
 }
+//echo("</div>");
 ?>
 
 

@@ -15,8 +15,7 @@ else
 		donePage($connection, $user, $userID);
 		if(isset($_POST['finished']))
 		{
-			header('Location: TotalsPage.php');
-			die();
+			donePage($connection, $user, $userName);
 		}
 	}
 	else
@@ -25,31 +24,52 @@ else
 	}
 }
 
-function modPage($connection, $user, $userID)
-{
-	echo("<div class='outerHomeCont'>");
-	echo("<h1> Welcome $user this is Modify Statistics Page </h1>");
-	echo("<form action='TotalsPage.php' method='POST'><fieldset>");
-	echo("<div class='innerCont'>");
-	echo("<h3>Modify your data</h3>");
-	showMod($connection, $user, $userID);
-	echo("<input type='submit' name='confirmed' value='Confirm Change'><input type='submit' name='' value='Return'>");
-	echo("</div>");
-	echo("</fieldset></form>");
-	echo("</div>");
-}
+
 
 function donePage($connection, $user, $userID)
 {
 	echo("<div class='outerHomeCont'>");
 	echo("<h1> Welcome $user this is Modify Statistics Page </h1>");
 	echo("<form action='TotalsPage.php' method='POST'><fieldset>");
+	
+	$selectTargetActivity = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+	$result = mysqli_query($connection,$selectTargetActivity);
+			
+			$types = array();
+			$typesId = array();
+
+			while($row = mysqli_fetch_assoc($result))
+				{
+					$types[] = $row['catName'];
+					$typesId[] = $row['catID'];
+				}	
+	$modMinutes = $_POST['modData'];
+	$dateModify = $_POST['hidden'];
+	for ($i=0; $i<count($types); $i++)
+		//echo("Mod Minutes = $modMinutes[$i]");
+	{
+			$selectTargetActivity = "SELECT * FROM tblExerTimes WHERE userID = '$userID' AND catID = '$typesId[$i]' AND date = '$dateModify'";
+			$result = mysqli_query($connection,$selectTargetActivity);
+			
+			if (mysqli_num_rows($result) == 0) 
+			{
+				$insertQuery = "INSERT into tblExerTimes(userID,catID,date,minutes) VALUES ('$userID','$typesId[$i]','$dateModify','$modMinutes[$i]')";	
+				$result = mysqli_query($connection, $insertQuery);
+			}
+			else 
+			{ 
+				$updateQuery = "UPDATE tblExerTimes SET minutes = '$modMinutes[$i]' WHERE userID = '$userID' AND date = '$dateModify' AND catID = '$typesId[$i]'";	
+				$result = mysqli_query($connection, $updateQuery);
+					
+			}
+	}
 	echo("<div class='innerCont'>");
 	echo("<h3>Modification complete</h3>");
 	echo("<input type='submit' name='finished' value='Return to Life Stats'>");
 	echo("</div>");
 	echo("</fieldset></form>");
 	echo("</div>");
+	
 }
 
 function totalsPage($connection, $user, $userID)
@@ -70,53 +90,72 @@ function totalsPage($connection, $user, $userID)
 	echo("</div>");
 }
 
-function showMod($connection, $user, $userID)
-{	
-	echo("
+
+function modPage($connection, $user, $userID)
+{
+	echo("<div class='outerHomeCont'>");
+	echo("<h1> Welcome $user this is Modify Statistics Page </h1>");
+	echo("<form action='TotalsPage.php' method='POST'><fieldset>");
+	echo("<div class='innerCont'>");
+	echo("<h3>Modify your data</h3>
+	
 	<table>
 	<tr>
-	<th>Date</th>
 	");
 	
 	$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
 	$result = mysqli_query($connection,$selectString);
 	
 	$types = array();
+	$typesName = array();
+	$modData = array();
 
 	while($row = mysqli_fetch_assoc($result))
 	{
 		$types[] = $row['catID'];
-		echo("<th>$row[catName]</th>");					
+		$typesName[] = $row['catName'];
+		//echo("<th>$row[catName]</th>");					
 	}
 	echo("</tr>");
 	
 	$toMod = $_POST['modField'];
 	$selectField = "SELECT * FROM tblExerTimes WHERE date = '$toMod'";
 	$result = mysqli_query($connection, $selectField);
+	
 	$row = mysqli_fetch_assoc($result);
+	
 	$tempDate = $row['date'];
-	echo("<tr><td>$tempDate</td>");
+	echo("<br><caption>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$tempDate</caption>
+	<input type='hidden' value='$tempDate' name ='hidden'/>");
+	echo("<tr><th>Activity</th><th> Minutes </th></tr>");	
 	
 	for($i=0; $i < count($types); $i++)
 	{
-		
+		echo("<tr><td>$typesName[$i] </td> ");
 		$typeSearch = $types[$i];
-		$selectField = "SELECT * FROM tblExerTimes WHERE catID = '$typeSearch' and date = '$toMod'";
+		$selectField = "SELECT * FROM tblExerTimes WHERE catID = '$typeSearch' and date = '$toMod' and userID = '$userID'";
 		$result = mysqli_query($connection, $selectField);
 		
-		if (mysqli_num_rows($result) > 0)
-		{
+		//if (mysqli_num_rows($result) > 0)
+		//{ 
 			$row = mysqli_fetch_assoc($result);
-			echo ("<td><input type='text' size='10' value='$row[minutes]'><></td>");
-		}
+			$modData[$i] = $row['minutes'];
+			
+			echo ("<td><input type='text' size='10' value='$modData[$i]' name='modData[]'></td> </tr>");		
+		/*}
 		else
 		{
 			echo ("<td>0</td>");
 		}
+		*/
 	}
-	echo("</tr></table>");
+	echo("</table>");	
+	
+	echo("<input type='submit' name='confirmed' value='Confirm Change'><input type='submit' name='' value='Return'>");
+	echo("</div>");
+	echo("</fieldset></form>");
+	echo("</div>");
 }
-
 function showTable($connection, $user, $userID)
 {
 	echo("
@@ -143,7 +182,7 @@ function showTable($connection, $user, $userID)
 		$types[] = $row['catID'];
 		echo("<th>$row[catName]</th>");					
 	}
-	echo("<th>CheckBox</th>");
+	echo("<th>Select</th>");
 	echo("</tr>");
 	
 	for($i = 0; $i < count($dates); $i++)
@@ -208,8 +247,20 @@ function showTotals($connection,$user, $userID)
 			{	
 				$totalMinutes =	$totalMinutes + $row['minutes'];			
 			}
-			echo("<td>$totalMinutes</td>");
-			echo("</tr>");
+			if($totalMinutes < 60)
+			{
+		
+			echo("<td>$totalMinutes minutes</td>");
+				echo("</tr>");
+			}
+			else
+			{
+				$totalhours = $totalMinutes/60;
+				$hours = $totalhours%24;
+				$minutes = $totalMinutes%60;
+				echo("<td>$hours hours and $minutes minutes</td>");
+				echo("</tr>");
+			}	
 		}				
 		echo("
 	</table>");

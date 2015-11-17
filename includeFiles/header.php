@@ -10,11 +10,6 @@ include "connect.inc.php";
 	<link rel="stylesheet" href="../Style13.css">
 	<!-- Linking the font I chose to use -->
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-
-	 <?php
-			$user = $_SESSION['userName'];
-			$userID = $_SESSION['userID'];
-	 ?>
 </head>
 <body>	
 	<div class="menu">

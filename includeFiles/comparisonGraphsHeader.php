@@ -1,6 +1,13 @@
 <?php
 session_start();
 include "connect.inc.php";
+
+if (isset($_SESSION['userID']))
+{
+	$userID = $_SESSION['userID'];
+	$user = $_SESSION['userName'];
+}
+
 ?>
 <!doctype html>
 <html>
@@ -10,40 +17,34 @@ include "connect.inc.php";
 	<link rel="stylesheet" href="../Style13.css">
 	<!-- Linking the fonts I chose to use -->
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-
-	 <?php
-			$user = $_SESSION['userName'];
-			$userID = $_SESSION['userID'];
-	 ?>
-	 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawVisualization);
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawVisualization);
 
-		function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([<?php
-			echo("['Dates'");
+	function drawVisualization() {
+	// Some raw data (not necessarily accurate)
+	var data = google.visualization.arrayToDataTable([<?php
+	echo("['Dates'");
+
+	$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+	$result = mysqli_query($connection,$selectString);
 	
-			$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
-			$result = mysqli_query($connection,$selectString);
-			
-			$types = array();
+	$types = array();
 
-			while($row = mysqli_fetch_assoc($result))
-				{
-					$types[] = $row['catID'];
-					echo(",'$row[catName]'");					
-				}
-				echo("]");				
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$types[] = $row['catID'];
+		echo(",'$row[catName]'");					
+	}
+	echo("]");				
   
-	for	( $i =6; $i>= 0; $i--)
+	for( $i =6; $i>= 0; $i--)
 	{
 		$datesearch = date("Y-m-d", strtotime("-$i day"));
 		echo(",['$datesearch'");
 		
-		for	($j=0; $j<count($types); $j++)
+		for($j=0; $j<count($types); $j++)
 		{			
 			$typesearch = $types[$j];
 			$selectString= "SELECT * FROM tblExerTimes WHERE date = '$datesearch' AND catID = '$typesearch' AND userID = '$userID'";
@@ -51,7 +52,7 @@ include "connect.inc.php";
 			
 			if (mysqli_num_rows($result) > 0)
 			{
-			$row = mysqli_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				echo (", $row[minutes]");
 			}
 			else
@@ -59,50 +60,45 @@ include "connect.inc.php";
 				echo (", 0");
 			}
 		}
-			echo("]");
-			
-
+		echo("]");
 	}
-			  ?>
-	
+	?>
 	]);
 
     var options = {
       title : 'Weekly Exercise data for <? echo("$user"); ?>',
-      vAxis: {title: 'Hours'},
+      vAxis: {title: 'Minutes'},
       hAxis: {title: 'Exercise Time'},     
     };
 	
-	var chart = new google.visualization.ColumnChart(document.getElementById('chartDiv'));
+	var chart = new google.visualization.ColumnChart(document.getElementById('chartDivA'));
     chart.draw(data, options);
 	
 	<?
-	
-		$selectUser = "SELECT DISTINCT userID FROM tblExerTimes WHERE userID != '$userID' ORDER BY RAND() LIMIT 0,1 ";
-			$result = mysqli_query($connection,$selectUser);
+	$selectUser = "SELECT DISTINCT userID FROM tblExerTimes WHERE userID != '$userID' ORDER BY RAND() LIMIT 0,1 ";
+	$result = mysqli_query($connection,$selectUser);
 			
-			$row = mysqli_fetch_assoc($result);
-			$randomUser = $row['userID'];
-
+	$row = mysqli_fetch_assoc($result);
+	$randomUser = $row['userID'];
 	?>
-//Second Graph     
-        // Some raw data (not necessarily accurate)
-        var data1 = google.visualization.arrayToDataTable([<?php
-			echo("['Dates'");
 	
-			$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
-			$result = mysqli_query($connection,$selectString);
+	//Second Graph     
+    var data1 = google.visualization.arrayToDataTable([<?php
+	echo("['Dates'");
+	
+	$selectString = 'SELECT DISTINCT catID, catName FROM tblExerCategories';
+	$result = mysqli_query($connection,$selectString);
 			
-			$types = array();
+	$types = array();
 
-			while($row = mysqli_fetch_assoc($result))
-				{
-					$types[] = $row['catID'];
-					echo(",'$row[catName]'");					
-				}
-				echo("]");				
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$types[] = $row['catID'];
+		echo(",'$row[catName]'");					
+	}
+	echo("]");				
   
-	for	( $i =6; $i>= 0; $i--)
+	for( $i =6; $i>= 0; $i--)
 	{
 		$datesearch = date("Y-m-d", strtotime("-$i day"));
 		echo(",['$datesearch'");
@@ -115,7 +111,7 @@ include "connect.inc.php";
 			
 			if (mysqli_num_rows($result) > 0)
 			{
-			$row = mysqli_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				echo (", $row[minutes]");
 			}
 			else
@@ -123,21 +119,18 @@ include "connect.inc.php";
 				echo (", 0");
 			}
 		}
-			echo("]");
-			
-
+		echo("]");
 	}
-			  ?>
-	
+	?>
 	]);
 
     var options1 = {
       title : 'Weekly Exercise data for Random User',
-      vAxis: {title: 'Hours'},
+      vAxis: {title: 'Minutes'},
       hAxis: {title: 'Exercise Time'},     
     };
 	
-	var chart = new google.visualization.ColumnChart(document.getElementById('chartDiv1'));
+	var chart = new google.visualization.ColumnChart(document.getElementById('chartDivB'));
     chart.draw(data1, options1);
 	}
 	</script>
