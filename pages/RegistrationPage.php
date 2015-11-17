@@ -55,7 +55,7 @@ function showform ($connection, $firstname='',$lastname='', $email='', $userName
 function cleanTheInput($data)
 {
   $data = trim ($data);
-  $data = stripcslashes($data);
+  $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;	  
 }

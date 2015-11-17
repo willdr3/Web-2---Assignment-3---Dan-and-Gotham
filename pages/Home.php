@@ -25,7 +25,7 @@ if($lastDate != 0)
 			echo("<div class='innerCont'>");
 				echo("<h1> Welcome to X-Track $user</h1>");
 				echo("<h2>You must be feeling fit today, you're back again</h2>");
-				echo("<h3>While you're here, be sure to <a href='DataPage.php' />Check In</a></h3>");
+				echo("<h3>While you're here, be sure to <a href='DataPage.php'>Check In</a></h3>");
 	}
 	else
 	{
@@ -33,7 +33,7 @@ if($lastDate != 0)
 			echo("<div class='innerCont'>");
 				echo("<h1> Welcome to X-Track $user</h1>");
 				echo("<h2>It's been $days days since your last check-in</h2>");
-				echo("<h3>In saying that, you must be here to <a href='DataPage.php' />Check In</a></h3>");
+				echo("<h3>In saying that, you must be here to <a href='DataPage.php'>Check In</a></h3>");
 	}
 }
 else
@@ -41,7 +41,7 @@ else
 	echo("<div class='outerHomeCont'>");
 		echo("<div class='innerCont'>");
 			echo("<h1> Welcome to X-Track $user</h1>");
-			echo("<h2>You have entered no data thus far. Try our <a href='DataPage.php' />Check In</a> page to enter some data</h2>");
+			echo("<h2>You have entered no data thus far. Try our <a href='DataPage.php'>Check In</a> page to enter some data</h2>");
 }
 echo("<br>");
 echo("<div class='homeImgsDiv'>");
